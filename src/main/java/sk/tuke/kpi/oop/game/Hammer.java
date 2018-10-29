@@ -1,39 +1,21 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.framework.AbstractActor;
-import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Hammer extends AbstractActor {
+import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.tools.BreakableTool;
+
+public class Hammer extends BreakableTool {
 
     private Animation animation;
-    private int numOfUsages;
 
     public Hammer(){
+        super(1);
         animation = new Animation("sprites/hammer.png", 16, 16);
         setAnimation(animation);
-        numOfUsages = 1;
     }
 
     public Hammer(int numOfUsages){
-        this();
-        this.numOfUsages = numOfUsages;
+        super(numOfUsages);
 
-    }
-
-    public int getNumOfUsages(){
-        return numOfUsages;
-    }
-
-    public void use(){
-        if(numOfUsages>0) {
-            numOfUsages--;
-            if (numOfUsages == 0) {
-                this.getScene().removeActor(this);
-            }
-        }
-    }
-
-    protected void setNumOfUsages(int numOfUsages){
-        this.numOfUsages = numOfUsages;
     }
 }
