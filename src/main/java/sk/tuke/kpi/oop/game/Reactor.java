@@ -1,7 +1,12 @@
 package sk.tuke.kpi.oop.game;
 
+import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
+import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
+import sk.tuke.kpi.oop.game.tools.Hammer;
 
 public class Reactor extends AbstractActor {
 
@@ -28,6 +33,14 @@ public class Reactor extends AbstractActor {
         updateAnimation();
     }
 
+
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+        //scene.scheduleAction(new PerpetualReactorHeating(1),this);
+        // v metode addedToScene triedy Reactor
+        new PerpetualReactorHeating(1).scheduleOn(this);
+    }
 
     public void addLight(Light light){
         if (light != null) {
