@@ -7,15 +7,16 @@ public class Cooler extends AbstractActor {
 
     private boolean isOn;
     private Animation coolerAnimation;
-    private Animation coolerOff;
+    //private Animation coolerOff;
     private Reactor reactor;
 
 
     public Cooler(Reactor reactor){
         this.isOn = false;
-        coolerAnimation = new Animation("images/fan.png", 32, 32, 200);
-        coolerOff = new Animation("images/fanOff.png", 32, 32);
-        setAnimation(coolerOff);
+        coolerAnimation = new Animation("sprites/fan.png", 32, 32, 0.2f);
+        //coolerOff = new Animation("images/fanOff.png", 32, 32);
+        coolerAnimation.stop();
+        setAnimation(coolerAnimation);
         this.reactor = reactor;
         //this.setCooledReactor(reactor);
 
@@ -44,16 +45,18 @@ public class Cooler extends AbstractActor {
         //updateLight();
     }
 
-    public boolean isOn(){
+    private boolean isOn(){
         return isOn;
     }
 
-    public void updateAnimation(){
+    private void updateAnimation(){
         if(isOn()){
+            coolerAnimation.play();
             this.setAnimation(coolerAnimation);
             //this.coolerAnimation.start();
         }else {
-            this.setAnimation(coolerOff);
+            coolerAnimation.stop();
+            this.setAnimation(coolerAnimation);
         }
     }
 }
