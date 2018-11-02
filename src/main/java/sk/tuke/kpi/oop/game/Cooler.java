@@ -1,7 +1,12 @@
 package sk.tuke.kpi.oop.game;
 
+import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.gamelib.actions.Invoke;
+import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+
 
 public class Cooler extends AbstractActor {
 
@@ -21,6 +26,14 @@ public class Cooler extends AbstractActor {
         //this.setCooledReactor(reactor);
 
 
+    }
+
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+        //new Invoke(this::coolReactor).scheduleOn(this);
+        //coolReactor();
+        new Loop<>(new Invoke(this::coolReactor)).scheduleOn(this);
     }
 
     private void coolReactor(){
