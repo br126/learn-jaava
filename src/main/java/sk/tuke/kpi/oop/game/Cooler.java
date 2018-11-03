@@ -10,10 +10,10 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Cooler extends AbstractActor {
 
-    private boolean isOn;
+    protected boolean isOn;
     private Animation coolerAnimation;
     //private Animation coolerOff;
-    private Reactor reactor;
+    protected Reactor reactor;
 
 
     public Cooler(Reactor reactor){
@@ -36,7 +36,7 @@ public class Cooler extends AbstractActor {
         new Loop<>(new Invoke(this::coolReactor)).scheduleOn(this);
     }
 
-    private void coolReactor(){
+    protected void coolReactor(){
         if(isOn()){
             reactor.decreaseTemperature(1);
         }
@@ -71,5 +71,9 @@ public class Cooler extends AbstractActor {
             coolerAnimation.stop();
             this.setAnimation(coolerAnimation);
         }
+    }
+
+    public Reactor getReactor() {
+        return reactor;
     }
 }
